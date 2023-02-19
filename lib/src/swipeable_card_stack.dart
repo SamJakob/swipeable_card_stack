@@ -120,7 +120,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
     frontCardAlign = widget.cardAlignment.last;
 
     // Init the animation controller
-    _animationController = AnimationController(duration: Duration(milliseconds: 700), vsync: this)
+    _animationController = AnimationController(duration: Duration(milliseconds: 200), vsync: this)
       ..addListener(() => setState(() {}))
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) changeCardsOrder();
