@@ -56,11 +56,11 @@ class Triple<T> {
   T? elementAt(int index) {
     switch (index) {
       case 0:
-        return _firstElement!;
+        return _firstElement;
       case 1:
-        return _secondElement!;
+        return _secondElement;
       case 2:
-        return _thirdElement!;
+        return _thirdElement;
       default:
         throw ArgumentError.value(index, "index", "Invalid index, must be less than or equal to 2.");
     }

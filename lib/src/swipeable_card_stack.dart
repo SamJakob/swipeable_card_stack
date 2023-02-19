@@ -236,7 +236,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
     return Align(
       alignment: _animationController.status == AnimationStatus.forward ? CardsAnimation.backCardAlignmentAnim(_animationController, widget.cardAlignment).value : widget.cardAlignment[0],
       child: SizedBox.fromSize(
-        size: _animationController.status == AnimationStatus.forward ? CardsAnimation.backCardSizeAnim(_animationController, computeAllSizes()).value : widget.cardAlignment[2],
+        size: _animationController.status == AnimationStatus.forward ? CardsAnimation.backCardSizeAnim(_animationController, computeAllSizes()).value : computeSizeFor(index: 0),
         child: cards[2],
       ),
     );
@@ -246,7 +246,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
     return Align(
       alignment: _animationController.status == AnimationStatus.forward ? CardsAnimation.middleCardAlignmentAnim(_animationController, widget.cardAlignment).value : widget.cardAlignment[1],
       child: SizedBox.fromSize(
-        size: _animationController.status == AnimationStatus.forward ? CardsAnimation.middleCardSizeAnim(_animationController, computeAllSizes()).value : widget.cardAlignment[1],
+        size: _animationController.status == AnimationStatus.forward ? CardsAnimation.middleCardSizeAnim(_animationController, computeAllSizes()).value : computeSizeFor(index: 1),
         child: cards[1],
       ),
     );
