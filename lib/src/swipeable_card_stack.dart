@@ -1,6 +1,7 @@
 part of 'package:swipeable_card_stack/swipeable_card_stack.dart';
 
 typedef CardSwipedCallback = bool Function(SwipeDirection direction, Widget card);
+typedef CardTappedCallback = void Function(Widget card);
 
 class SwipeableCardStack extends StatefulWidget {
   /// Optionally, a controller that can be specified to allow programmatic control
@@ -14,7 +15,7 @@ class SwipeableCardStack extends StatefulWidget {
   final CardSwipedCallback? onCardSwiped;
 
   /// Executed when a card is tapped.
-  final VoidCallback? onCardTapped;
+  final CardTappedCallback? onCardTapped;
 
   /// The multiplier for each card's width.
   /// Sets top, middle and bottom in that order.
@@ -159,7 +160,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: widget.onCardTapped,
+        onTap: () => widget.onCardTapped?.call(cards.first),
         child: IgnorePointer(
           ignoring: !enableSwipe,
           child: Stack(
@@ -207,7 +208,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
                           }
 
                           // Otherwise, animate the swipe completion.
-                          if (widget.onCardSwiped?.call(direction, cards[0]) ?? true) {
+                          if (widget.onCardSwiped?.call(direction, cards.first) ?? true) {
                             animateCards();
                           }
                         },
@@ -264,7 +265,7 @@ class _SwipeableCardStackState extends State<SwipeableCardStack> with SingleTick
   void changeCardsOrder() {
     setState(() {
       // Swap cards (back card becomes the middle card; middle card becomes the front card)
-      cards = cards.shift(add: nextCard, backwards: true);
+      cards = cards.shift(add: nextCard, backwards: false);
       nextCard = null;
 
       frontCardAlign = widget.cardAlignment.last;
